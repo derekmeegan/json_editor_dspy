@@ -1,11 +1,11 @@
 {
     "version": 2,
+  
     "builds": [
       {
-        "src": "server/package.json",
+        "src": "server/server.js",
         "use": "@vercel/node",
         "config": {
-          "installCommand": "npm install --legacy-peer-deps",
           "includeFiles": ["server/**"]
         }
       },
@@ -13,22 +13,19 @@
         "src": "package.json",
         "use": "@vercel/static-build",
         "config": {
-          "installCommand": "npm install --legacy-peer-deps",
           "distDir": "dist"
         }
       }
     ],
-    "routes": [
+  
+    "rewrites": [
       {
-        "src": "/api/(.*)",
-        "dest": "/server/server.js"
+        "source": "/api/:path*",
+        "destination": "/server/server.js"
       },
       {
-        "handle": "filesystem"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
+        "source": "/:path*",
+        "destination": "/index.html"
       }
     ]
-}
+  }  
