@@ -299,7 +299,7 @@ const EditorPage: React.FC = () => {
   }, [selectedJsonFile, jsonFolder, saveToResults, updateJsonFile]);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)]">
+    <div className="flex flex-col h-[calc(100vh-6rem)] px-4">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <button

@@ -133,26 +133,12 @@ const JsonEditorWrapper = forwardRef<JsonEditorRef, JsonEditorProps>(({
       </div>
       
       <div className="flex-1 overflow-auto p-4 bg-gray-50">
-        {jsonFile.approved ? (
-          // For approved files, render a read-only display
-          <div className="h-full w-full bg-white p-4 overflow-auto rounded border border-gray-200">
-            <pre className="text-sm">{JSON.stringify(jsonValue, null, 2)}</pre>
-          </div>
-        ) : (
-          // For editable files, use the JsonEditComponent
-          <JsonEditComponent 
-            data={jsonValue}
-            setData={setJsonValue}
-            onError={handleError}
-          />
-        )}
+        <JsonEditComponent 
+          data={jsonValue}
+          setData={setJsonValue}
+          onError={handleError}
+        />
       </div>
-      
-      {jsonFile.approved && (
-        <div className="bg-green-50 p-2 text-center text-green-700 font-medium">
-          This file has been approved and saved to results
-        </div>
-      )}
     </div>
   );
 });
