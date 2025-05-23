@@ -30,7 +30,29 @@ const RESULT_FOLDER_ID   = process.env.RESULT_FOLDER_ID;
 /* ---------------------------- app setup ----------------------------- */
 const app = express();
 app.use(compression());
-app.use(cors());
+
+// CORS Configuration
+const allowedOrigins = [
+  'https://json-editor-dspy.vercel.app',
+  'http://localhost:5173', // Default Vite dev server port
+  // Add any other origins you need to allow
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg =
+        'The CORS policy for this site does not ' +
+        'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+};
+
+app.use(cors(corsOptions)); // Use specific CORS options
 app.use(express.json());
 
 /* ------------------------------ cache -------------------------------- */
