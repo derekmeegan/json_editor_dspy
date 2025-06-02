@@ -101,7 +101,7 @@ const Dashboard: React.FC = () => {
                     
                     {matchingFolder && (
                       <div className="text-sm text-gray-500">
-                        {Math.round(matchingFolder.progress)}% complete
+                        {matchingFolder.progress ? Math.round(matchingFolder.progress) : 0}% complete
                       </div>
                     )}
                   </div>
